@@ -9,7 +9,10 @@ assert(isa(n,'vpi'), "Input must be VariablePrecisionInteger");
 
 % Extract chars in reverse order
 while n > 0
-   c = [char(double(mod(n,256))) c];
+   letter = char(double(mod(n,256)));
+   if letter ~= 0 %Skip termination char
+    c = [letter c];
+   end
    n = n / 256;
 end
 
