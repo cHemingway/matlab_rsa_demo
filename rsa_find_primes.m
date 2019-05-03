@@ -30,9 +30,11 @@ function [p,q] = rsa_find_primes(n_bits)
         if isprime(val) && ~any(find(random_primes==val))
                 random_primes = [random_primes val];
                 % Update max_val so _total_ is n_bits
-                n_bits = n_bits - ceil(log2(val));
-                max_val = 2^n_bits - 1;
-                min_val = round(max_val / 2);
+                % We have to be careful to only round as late as possible
+                % to ensure that we always hit n_bits in total
+                n_bits = n_bits - log2(val);
+                max_val = round(2^n_bits);
+                min_val = round(2^(n_bits-1)) + 1; 
                 continue;
         end
         % Exit eventually if we didn't find anything

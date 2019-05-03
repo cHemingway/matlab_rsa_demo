@@ -21,7 +21,7 @@ end
 
 % Calculate base
 n = p * q; % Base is _product_ of these
-% assert(ceil(log2(n)) == n_bits);
+assert(ceil(log2(n)) == n_bits); % Check base is our number of bits
 
 % Calculate max exponent size
 % This is ?(n), Carmicheals Totient Function of n
