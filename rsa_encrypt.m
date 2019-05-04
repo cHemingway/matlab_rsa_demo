@@ -6,8 +6,7 @@ function c = rsa_encrypt(plaintext, Kp)
 %   c = rsa_encrypt(plaintext, Kp)
 %   See also rsa_keygen, rsa_decrypt
 
-% TODO padding
-% TODO use Modular exponentiation instead
+% TODO use binary modular exponentiation instead of needing VPI library
 
 % Convert text to a number
 if isa(plaintext, 'char') || isa(plaintext, 'string')
@@ -20,6 +19,8 @@ end
 if length(plaintext) * 8 > ceil(log2(Kp.n))
     error("Plaintext is longer than key");
 end
+
+% We have not added padding, which effectively means zero padding is used
 
 % Encrypt, c = p^e mod n
 % Using Matlab powermod function as faster
