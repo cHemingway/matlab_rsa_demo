@@ -22,6 +22,7 @@ end
 
 % Find p,q
 [p,q] = rsa_find_primes(n_bits);
+assert(isprime(p) && isprime(q), "p and/or q not prime");
 
 % Calculate base
 n = p * q; % Base is _product_ of these
