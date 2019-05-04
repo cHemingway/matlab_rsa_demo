@@ -38,7 +38,7 @@ else
     c_error = c-1;
 end
 
-fprintf("Flipping a bit, decoded to '%s' \n",rsa_decrypt(c_error,Ks));
+fprintf("Flipping a bit, decrypted to '%s' \n",rsa_decrypt(c_error,Ks));
 
 % Time "cracking" the code
 tic;
