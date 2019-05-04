@@ -1,6 +1,8 @@
 % Author: Chris Hemingway
 % Part of matlab_rsa project
 
+clear; clc;
+
 % Demonstration, creates keys, encrypts a message, then decrypts
 
 % Use VariablePrecisionIntegers library
@@ -12,17 +14,20 @@ addpath(['VariablePrecisionIntegers' filesep 'VariablePrecisionIntegers']);
 show_timings = false;
 
 % Message, has to use less bits than the key size
-message = 'Fnord';
+message = 'Hello';
 
 % Generate keys, 48 bit
 [Kp, Ks] = rsa_keygen(48);
 
-fprintf("Keys generated \n");
+fprintf("Generated %d bit public/private keypair \n",length(dec2bin(Kp.n)));
 
 % Encrypt
 c = rsa_encrypt(message, Kp);
 fprintf("Encrypted: '%s' to c=",message);
 disp(c); % Have to use disp as VPI does not support plaintext
+
+% Count bits of codeword, may or may not match key length
+fprintf("Codeword is %d bits long\n", length(vpi2bin(c)) );
 
 % Decrypt
 tic;
@@ -38,7 +43,7 @@ else
     c_error = c-1;
 end
 
-fprintf("Flipping a bit, decrypted to '%s' \n",rsa_decrypt(c_error,Ks));
+fprintf("Single bit error in codeword, decrypted to '%s' \n",rsa_decrypt(c_error,Ks));
 
 % Time "cracking" the code
 tic;
