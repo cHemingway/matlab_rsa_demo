@@ -2,7 +2,8 @@
 % Part of matlab_rsa project
 
 function [Kp, Ks] = rsa_keygen(n_bits)
-% RSA_KEYGEN generate public/private key structs of size n_bits
+% RSA_KEYGEN generate public/private key structs of size n_bits (even)
+% n_bits must be an even number for our particular algorithm
 % Warning,  >52 bits not possible due to MATLAB limitations
 %
 %   [Kp,Ks] = rsa_keygen(8); % Generate 10 bit key
@@ -12,8 +13,11 @@ function [Kp, Ks] = rsa_keygen(n_bits)
 %   ...           % Will be random
 
 % Check input is sensible
-if n_bits > 53
+if n_bits > 52
    error("Value of n_bits too large"); 
+end
+if mod(n_bits,2)==1
+    error("Value of n_bits must be even");
 end
 
 % Find p,q
@@ -24,7 +28,7 @@ n = p * q; % Base is _product_ of these
 assert(ceil(log2(n)) == n_bits); % Check base is our number of bits
 
 % Calculate max exponent size
-% This is ?(n), Carmicheals Totient Function of n
+% This is $\lamba(n)$, Carmicheals Totient Function of n
 % <https://en.wikipedia.org/wiki/Carmichael_function>
 % However, since p and q are both prime, we can use the following instead
 X = (p-1) * (q-1);
