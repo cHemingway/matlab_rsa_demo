@@ -8,10 +8,6 @@ if isa(c, 'string') % Convert strings
     c = char(c);
 end
 
-if length(c) > 8
-    error("Only up to 8 characters supported");
-end
-
 n = vpi();
 for v=c
     n = n+uint8(v); %Get 8-bit value of character and add to array
