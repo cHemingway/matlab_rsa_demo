@@ -14,7 +14,7 @@ addpath(['VariablePrecisionIntegers' filesep 'VariablePrecisionIntegers']);
 show_timings = false;
 
 % Message, has to use less bits than the key size
-message = 'Hello';
+message = 'Test';
 
 % Generate keys, 48 bit
 [Kp, Ks] = rsa_keygen(48);
@@ -27,7 +27,7 @@ fprintf("Encrypted: '%s' to c=",message);
 disp(c); % Have to use disp as VPI does not support plaintext
 
 % Count bits of codeword, may or may not match key length
-fprintf("Codeword is %d bits long\n", length(vpi2bin(c)) );
+fprintf("Ciphertext is %d bits long\n", length(vpi2bin(c)) );
 
 % Decrypt
 tic;
