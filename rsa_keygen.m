@@ -37,7 +37,7 @@ X = (p-1) * (q-1);
 
 % Choose public exponent e, where 1<e<x and gcd(e,x) == 1
 % Small values make encryption quicker, so start low and work up
-for e=2:X-1
+for e=3:X-1
     if gcd(e,X) == 1
         break;
     end
