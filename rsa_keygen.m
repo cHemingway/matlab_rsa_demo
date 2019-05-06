@@ -59,6 +59,10 @@ assert(d~=n);
 d = minv(e, X);
 assert(mod(d*e,X) == 1);
 
+% Convert d back to a double if it is small enough for flexibility
+if ceil(log2(d)) <= 53 % Max integer in double is 2^53
+    d = double(d);
+end
 
 % Combine base n and exponent e to create public key
 Kp.n = n;
