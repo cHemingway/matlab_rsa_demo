@@ -13,6 +13,9 @@ function c = rsa_encrypt(plaintext, Kp, varargin)
 % Convert text to a number
 if isa(plaintext, 'char') || isa(plaintext, 'string')
     p = char2vpi(plaintext);
+% Convert small integers to double so algorithm works
+elseif isinteger(plaintext)
+    p = double(plaintext);
 else
     p = plaintext;
 end
